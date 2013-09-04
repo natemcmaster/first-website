@@ -1,0 +1,148 @@
+<HTML>
+
+<HEAD>
+
+<TITLE>Kellogg Middle School, Rochester, MN</TITLE>
+
+<META HTTP-EQUIV="content-script-type" CONTENT="text/javascript">
+
+<META NAME="author" CONTENT="Nate McMaster">
+
+</HEAD>
+
+<SCRIPT>
+
+self.name="topframe"
+
+images = new Array()
+
+images[0] = new Image()
+images[0].src = "images/whiteArrow.gif"
+
+images[1] = new Image()
+images[1].src = "images/blankArrow.gif"
+
+images[2] = new Image()
+images[2].src = "images/silverArrow.gif"
+
+currentPage="home"
+
+function arrowOn(pageName){
+
+   self.navi.document.images[pageName].src = images[0].src
+
+}
+
+function arrowOff(pageName){
+
+for(i=0;i<pageContent.length;i++){
+  for(j=0;j<pageContent[i].length;j++){
+      if(pageName == pageContent[i][j]){
+        pageLink = pageContent[i][j]
+      }
+  }
+}
+
+if(currentPage == pageLink){
+   self.navi.document.images[pageName].src = images[2].src
+}
+else{
+   self.navi.document.images[pageName].src = images[1].src
+}
+}
+
+
+var supported = (document.getElementById || document.all);
+
+if (supported)
+{
+	var max = 10;
+	var shown = new Array();
+	for (var i=1;i<=max;i++)
+	{
+		shown[i+1] = false;
+	}
+
+}
+
+function blocking(i)
+{
+	if (!supported)
+	{
+		alert('This link does not work in your browser.');
+		return;
+	}
+	shown[i] = (shown[i]) ? false : true;
+	current = (shown[i]) ? 'block' : 'none';
+	if (document.getElementById)
+	{
+		self.navi.document.getElementById('number'+i).style.display = current;
+	}
+	else if (document.all)
+	{
+		self.navi.document.all['number'+i].style.display = current;
+	}
+}
+
+pageContent = new Array()
+pageContent[0] = new Array("home")
+pageContent[1] = new Array("newsletter")
+pageContent[2] = new Array("aboutus")
+pageContent[3] = new Array("honorroll")
+pageContent[4] = new Array("generalinfo","academicinfo","behavior")
+pageContent[5] = new Array("kelloggstaff")
+pageContent[6] = new Array("teamsites")
+pageContent[7] = new Array("sep","oct","nov","dec","jan","feb","mar","apr","may","jun")
+pageContent[8] = new Array("dailyschedule")
+pageContent[9] = new Array("contactus")
+
+pageTitles = new Array()
+pageTitles[0] = new Array("Middle School, Rochester, MN")
+pageTitles[1] = new Array("Newsletter")
+pageTitles[2] = new Array("- About Us")
+pageTitles[3] = new Array("Honor Roll")
+pageTitles[4] = new Array("Info - General","Info - Academic","Info - Behavior Expectaions")
+pageTitles[5] = new Array("Staff")
+pageTitles[6] = new Array("Team and Teacher Sites")
+pageTitles[7] = new Array("Calendar - September","Calendar - October","Calendar - November","Calendar - December","Calendar - January","Calendar - February","Calendar - March","Calendar - April","Calendar - May","Calendar - June")
+pageTitles[8] = new Array("Daily Schedule")
+pageTitles[9] = new Array("Middle School - Contact Us")
+
+
+function pageLoad(pageName){
+
+self.navi.document.images[pageName].src = images[2].src
+num = -1
+
+for(i=0;i<pageContent.length;i++){
+
+  for(j=0;j<pageContent[i].length;j++){
+      if(pageName == pageContent[i][j]){
+        num=i
+        currentPage = pageContent[i][j]
+        document.title = "Kellogg " +pageTitles[i][j]
+      }
+  }
+}
+
+if(num !=-1 && !shown[num]){
+  self.blocking(num)
+}
+
+}
+
+function pageUnload(pageName){
+self.navi.document.images[pageName].src = images[1].src
+}
+
+</SCRIPT>
+
+
+<FRAMESET COLS="170,*" FRAMESPACING=0 FRAMEBORDER=0 BORDER=0>
+<FRAME NAME="navi" SRC="navi.html" NORESIZE>
+<FRAME NAME="mainpage" SRC="main.html" NORESIZE>
+</FRAMESET>
+
+
+
+</HTML>
